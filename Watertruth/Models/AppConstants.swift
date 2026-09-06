@@ -17,7 +17,7 @@ enum AppConstants {
         static let terms = URL(string: "https://botland.studio/terms")!
         static let studioName = "Botland Studio"
         static let shareDelayDays = 3
-        static let appStoreURL = URL(string: "https://apps.apple.com/app/id6809126843")!
+        static let appStoreURL = URL(string: "https://apps.apple.com/app/id6809161990")!
     }
 
     enum ProductID {
