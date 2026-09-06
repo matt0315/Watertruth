@@ -22,8 +22,16 @@
 	<string>1.0.0</string>
 	<key>CFBundleVersion</key>
 	<string>5</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Watertruth uses the camera so you can capture soil-check and plant progress photos for your journal — never for plant identification or disease scanning.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Watertruth accesses your photo library so you can attach cover and progress photos to plants and care events. Photos stay on-device for your journal.</string>
+	<key>NSUserNotificationsUsageDescription</key>
+	<string>Watertruth sends soil-check reminders so you water at the right time.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchScreen</key>
 	<dict/>
 	<key>UIRequiresFullScreen</key>
@@ -32,17 +40,12 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>UIBackgroundModes</key>
+	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
-		<string>remote-notification</string>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Add progress photos to your plant journal.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Take a photo of your plant for its profile or journal.</string>
-	<key>NSUserNotificationsUsageDescription</key>
-	<string>Watertruth sends soil-check reminders so you water at the right time.</string>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
 </dict>
 </plist>
