@@ -40,10 +40,6 @@ targets:
     entitlements:
       path: Watertruth/Watertruth.entitlements
       properties:
-        com.apple.developer.icloud-container-identifiers:
-          - iCloud.com.botlandstudio.watertruth
-        com.apple.developer.icloud-services:
-          - CloudKit
         com.apple.security.application-groups:
           - group.com.botlandstudio.watertruth
     dependencies:
