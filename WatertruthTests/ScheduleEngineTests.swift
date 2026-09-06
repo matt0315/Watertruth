@@ -1,6 +1,7 @@
 import XCTest
 @testable import Watertruth
 
+@MainActor
 final class ScheduleEngineTests: XCTestCase {
     var engine: ScheduleEngine!
     var calendar: Calendar!
@@ -157,5 +158,12 @@ final class ScheduleEngineTests: XCTestCase {
         XCTAssertEqual(body, "Check soil — Monstera")
         XCTAssertFalse(body.lowercased().hasPrefix("water now"))
         XCTAssertTrue(body.contains("Check soil"))
+    }
+
+    func testFertilizeBodyUsesFeedWording() {
+        let body = NotificationService.fertilizeBody(plantName: "Pothos")
+        XCTAssertEqual(body, "Time to feed Pothos")
+        XCTAssertFalse(body.lowercased().contains("water now"))
+        XCTAssertTrue(body.lowercased().contains("feed"))
     }
 }

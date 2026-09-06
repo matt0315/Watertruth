@@ -28,6 +28,8 @@ final class Plant {
     var fertilizeEnabled: Bool
     var fertilizeIntervalDays: Int
     var nextFertilizeAt: Date?
+    var lastFertilizedAt: Date?
+    var lastFertilizedBy: String?
     var repotEnabled: Bool
     var repotIntervalDays: Int
     var nextRepotAt: Date?
@@ -85,6 +87,8 @@ final class Plant {
         self.fertilizeEnabled = false
         self.fertilizeIntervalDays = 30
         self.nextFertilizeAt = nil
+        self.lastFertilizedAt = nil
+        self.lastFertilizedBy = nil
         self.repotEnabled = false
         self.repotIntervalDays = 365
         self.nextRepotAt = nil
@@ -115,5 +119,49 @@ final class Plant {
         let formatter = RelativeDateTimeFormatter()
         formatter.unitsStyle = .abbreviated
         return "\(by) · \(formatter.localizedString(for: at, relativeTo: Date()))"
+    }
+
+    var isFertilizeDueToday: Bool {
+        guard fertilizeEnabled, let next = nextFertilizeAt else { return false }
+        let endOfToday = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: Date()) ?? Date()
+        return next <= endOfToday
+    }
+
+    var whoFertilizedLabel: String? {
+        guard let by = lastFertilizedBy, let at = lastFertilizedAt else { return nil }
+        let formatter = RelativeDateTimeFormatter()
+        formatter.unitsStyle = .abbreviated
+        return "\(by) · \(formatter.localizedString(for: at, relativeTo: Date()))"
+    }
+
+    var lastFertilizedRelativeLabel: String? {
+        guard let at = lastFertilizedAt else { return nil }
+        let formatter = RelativeDateTimeFormatter()
+        formatter.unitsStyle = .full
+        return formatter.localizedString(for: at, relativeTo: Date())
+    }
+
+    /// Logs a feed/fertilize event, enables reminders if needed, and advances `nextFertilizeAt`.
+    @discardableResult
+    func logFertilized(
+        performedBy: String,
+        note: String? = nil,
+        now: Date = Date(),
+        calendar: Calendar = .current
+    ) -> CareEvent {
+        let trimmed = note?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let noteValue = (trimmed?.isEmpty == false) ? trimmed : nil
+
+        if !fertilizeEnabled {
+            fertilizeEnabled = true
+        }
+        lastFertilizedAt = now
+        lastFertilizedBy = performedBy
+        nextFertilizeAt = calendar.date(byAdding: .day, value: fertilizeIntervalDays, to: now)
+        updatedAt = now
+
+        let event = CareEvent(kind: .fertilized, performedBy: performedBy, note: noteValue, plant: self)
+        careEvents.append(event)
+        return event
     }
 }
