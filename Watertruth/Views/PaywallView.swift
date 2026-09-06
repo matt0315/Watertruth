@@ -92,7 +92,7 @@ struct PaywallView: View {
                 }
                 .padding()
             }
-            .background(WatertruthTheme.sand.ignoresSafeArea())
+            .background(WatertruthTheme.pageBackground.ignoresSafeArea())
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
