@@ -22,6 +22,12 @@ struct DueTodayView: View {
         return due.filter { $0.roomZone == roomFilter }
     }
 
+    private var fertilizeDue: [Plant] {
+        let due = plants.filter(\.isFertilizeDueToday)
+        if roomFilter == "All" { return due }
+        return due.filter { $0.roomZone == roomFilter }
+    }
+
     private var upcoming: [Plant] {
         let soon = plants.filter { !$0.isDueToday }
         if roomFilter == "All" { return Array(soon.prefix(10)) }
@@ -45,7 +51,7 @@ struct DueTodayView: View {
                     .accessibilityLabel("Filter by room or zone")
                 }
 
-                if filteredDue.isEmpty && upcoming.isEmpty {
+                if filteredDue.isEmpty && fertilizeDue.isEmpty && upcoming.isEmpty {
                     Section {
                         emptyState
                     }
@@ -58,6 +64,16 @@ struct DueTodayView: View {
                                 soilCheckPlant = plant
                             } onSnooze: {
                                 snooze(plant)
+                            }
+                        }
+                    }
+                }
+
+                if !fertilizeDue.isEmpty {
+                    Section("Feeding due") {
+                        ForEach(fertilizeDue) { plant in
+                            FertilizeDueRow(plant: plant) {
+                                logFertilized(plant)
                             }
                         }
                     }
@@ -114,6 +130,22 @@ struct DueTodayView: View {
         Task { await NotificationService.shared.scheduleSoilCheck(for: plant.id, plantName: plant.nickname, at: plant.nextDueAt) }
         WidgetDataWriter.write(plants: Array(plants))
     }
+
+    private func logFertilized(_ plant: Plant) {
+        let by = shareService.currentCaretakerName()
+        plant.logFertilized(performedBy: by)
+        try? modelContext.save()
+        if let at = plant.nextFertilizeAt {
+            Task {
+                await NotificationService.shared.scheduleFertilize(
+                    for: plant.id,
+                    plantName: plant.nickname,
+                    at: at
+                )
+            }
+        }
+        WidgetDataWriter.write(plants: Array(plants))
+    }
 }
 
 struct DuePlantRow: View {
@@ -163,6 +195,47 @@ struct DuePlantRow: View {
     }
 }
 
+struct FertilizeDueRow: View {
+    let plant: Plant
+    var onLog: () -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(plant.nickname)
+                        .font(.headline)
+                    Text(plant.roomZone)
+                        .font(.caption)
+                        .foregroundStyle(WatertruthTheme.muted)
+                    if let relative = plant.lastFertilizedRelativeLabel {
+                        Text("Last fertilized \(relative)")
+                            .font(.caption2)
+                            .foregroundStyle(WatertruthTheme.earth)
+                    } else {
+                        Text("Fertilize due")
+                            .font(.caption2)
+                            .foregroundStyle(WatertruthTheme.moss)
+                    }
+                }
+                Spacer()
+                if let next = plant.nextFertilizeAt {
+                    Text(next, style: .date)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
+            Button(action: onLog) {
+                Label("Log feeding", systemImage: "leaf.circle.fill")
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(WatertruthTheme.moss)
+            .accessibilityLabel("Log feeding for \(plant.nickname)")
+        }
+        .padding(.vertical, 4)
+    }
+}
+
 struct UpcomingRow: View {
     let plant: Plant
 
@@ -182,4 +255,3 @@ struct UpcomingRow: View {
         .accessibilityElement(children: .combine)
     }
 }
-

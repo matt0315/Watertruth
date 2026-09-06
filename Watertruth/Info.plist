@@ -21,7 +21,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0.0</string>
 	<key>CFBundleVersion</key>
-	<string>6</string>
+	<string>7</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Watertruth uses the camera so you can capture soil-check and plant progress photos for your journal — never for plant identification or disease scanning.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
