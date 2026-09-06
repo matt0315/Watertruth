@@ -1,0 +1,22 @@
+[
+  {"name": "Monstera deliciosa", "defaultIntervalDays": 7},
+  {"name": "Snake plant (Sansevieria)", "defaultIntervalDays": 14},
+  {"name": "Pothos", "defaultIntervalDays": 7},
+  {"name": "Peace lily", "defaultIntervalDays": 5},
+  {"name": "Fiddle-leaf fig", "defaultIntervalDays": 7},
+  {"name": "ZZ plant", "defaultIntervalDays": 14},
+  {"name": "Spider plant", "defaultIntervalDays": 7},
+  {"name": "Rubber plant", "defaultIntervalDays": 8},
+  {"name": "Philodendron", "defaultIntervalDays": 7},
+  {"name": "Calathea", "defaultIntervalDays": 5},
+  {"name": "Aloe vera", "defaultIntervalDays": 14},
+  {"name": "Chinese evergreen", "defaultIntervalDays": 9},
+  {"name": "Dracaena", "defaultIntervalDays": 10},
+  {"name": "Boston fern", "defaultIntervalDays": 4},
+  {"name": "Jade plant", "defaultIntervalDays": 14},
+  {"name": "String of pearls", "defaultIntervalDays": 14},
+  {"name": "Bird of paradise", "defaultIntervalDays": 7},
+  {"name": "Anthurium", "defaultIntervalDays": 6},
+  {"name": "Croton", "defaultIntervalDays": 6},
+  {"name": "Hoya", "defaultIntervalDays": 10}
+]
