@@ -14,7 +14,7 @@ open Watertruth.xcodeproj
 ```
 
 1. Set your **Development Team** on the `Watertruth` and `WatertruthWidget` targets.
-2. Enable App Groups `group.com.botlandstudio.watertruth` and (when ready) iCloud container `iCloud.com.botlandstudio.watertruth`.
+2. Enable App Groups `group.studio.botland.watertruth` and (when ready) iCloud container `iCloud.studio.botland.watertruth`.
 3. Optionally attach `Watertruth/Resources/Store.storekit` to the Run scheme for StoreKit testing.
 4. Run on an iOS 17+ simulator or device. Unit tests: `⌘U` (scheme **Watertruth**).
 

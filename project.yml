@@ -1,6 +1,6 @@
 name: Watertruth
 options:
-  bundleIdPrefix: com.botlandstudio
+  bundleIdPrefix: studio.botland
   deploymentTarget:
     iOS: "17.0"
   xcodeVersion: "15.0"
@@ -27,7 +27,7 @@ targets:
       properties:
         CFBundleDisplayName: Watertruth
         CFBundleShortVersionString: "1.0.0"
-        CFBundleVersion: "4"
+        CFBundleVersion: "5"
         CFBundleIconName: AppIcon
         UILaunchScreen: {}
         UIRequiresFullScreen: true
@@ -47,12 +47,12 @@ targets:
       path: Watertruth/Watertruth.entitlements
       properties:
         com.apple.security.application-groups:
-          - group.com.botlandstudio.watertruth
+          - group.studio.botland.watertruth
     dependencies:
       - target: WatertruthWidget
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.botlandstudio.watertruth
+        PRODUCT_BUNDLE_IDENTIFIER: studio.botland.watertruth
         INFOPLIST_FILE: Watertruth/Info.plist
         CODE_SIGN_ENTITLEMENTS: Watertruth/Watertruth.entitlements
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
@@ -70,17 +70,17 @@ targets:
       properties:
         CFBundleDisplayName: Watertruth Widget
         CFBundleShortVersionString: "1.0.0"
-        CFBundleVersion: "4"
+        CFBundleVersion: "5"
         NSExtension:
           NSExtensionPointIdentifier: com.apple.widgetkit-extension
     entitlements:
       path: WatertruthWidget/WatertruthWidget.entitlements
       properties:
         com.apple.security.application-groups:
-          - group.com.botlandstudio.watertruth
+          - group.studio.botland.watertruth
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.botlandstudio.watertruth.widget
+        PRODUCT_BUNDLE_IDENTIFIER: studio.botland.watertruth.widget
         INFOPLIST_FILE: WatertruthWidget/Info.plist
         CODE_SIGN_ENTITLEMENTS: WatertruthWidget/WatertruthWidget.entitlements
         GENERATE_INFOPLIST_FILE: false
@@ -96,7 +96,7 @@ targets:
       - target: Watertruth
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.botlandstudio.watertruth.tests
+        PRODUCT_BUNDLE_IDENTIFIER: studio.botland.watertruth.tests
         GENERATE_INFOPLIST_FILE: true
         TEST_HOST: "$(BUILT_PRODUCTS_DIR)/Watertruth.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Watertruth"
         BUNDLE_LOADER: "$(TEST_HOST)"

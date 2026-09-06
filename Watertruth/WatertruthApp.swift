@@ -21,7 +21,7 @@ struct WatertruthApp: App {
             "Watertruth",
             schema: schema,
             isStoredInMemoryOnly: false,
-            cloudKitDatabase: .none // TODO: .automatic when iCloud.com.botlandstudio.watertruth is live
+            cloudKitDatabase: .none // TODO: .automatic when iCloud.studio.botland.watertruth is live
         )
         do {
             return try ModelContainer(for: schema, configurations: [config])

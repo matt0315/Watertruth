@@ -58,7 +58,7 @@ struct HouseholdShareView: View {
                 }
                 .disabled(inviteName.trimmingCharacters(in: .whitespaces).isEmpty)
             } footer: {
-                Text("TODO(CloudKit): Present ShareLink / UICloudSharingController after enabling iCloud container iCloud.com.botlandstudio.watertruth and signing with your team. Local invites persist for UI/dev; they do not sync until CKShare is wired.")
+                Text("TODO(CloudKit): Present ShareLink / UICloudSharingController after enabling iCloud container iCloud.studio.botland.watertruth and signing with your team. Local invites persist for UI/dev; they do not sync until CKShare is wired.")
                     .font(.caption2)
             }
 

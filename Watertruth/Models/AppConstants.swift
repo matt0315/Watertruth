@@ -5,7 +5,7 @@ enum AppConstants {
     static let freePlantLimit = 7
     /// Household share soft cap (2–3 caretakers).
     static let householdShareMax = 3
-    static let appGroupID = "group.com.botlandstudio.watertruth"
+    static let appGroupID = "group.studio.botland.watertruth"
     static let trustTagline = "Guide, not gospel — always feel the soil."
     static let notAdviceDisclaimer = "Not professional horticultural advice. When in doubt, check the soil with your finger or a moisture meter."
 
@@ -21,9 +21,9 @@ enum AppConstants {
     }
 
     enum ProductID {
-        static let annual = "com.botlandstudio.watertruth.pro.annual"
-        static let monthly = "com.botlandstudio.watertruth.pro.monthly"
-        static let lifetime = "com.botlandstudio.watertruth.pro.lifetime"
+        static let annual = "studio.botland.watertruth.pro.annual"
+        static let monthly = "studio.botland.watertruth.pro.monthly"
+        static let lifetime = "studio.botland.watertruth.pro.lifetime"
         /// Intentionally no weekly SKU.
     }
 

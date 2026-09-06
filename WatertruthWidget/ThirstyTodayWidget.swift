@@ -18,7 +18,7 @@ struct WidgetSnapshot: Codable {
 }
 
 enum WidgetShared {
-    static let appGroupID = "group.com.botlandstudio.watertruth"
+    static let appGroupID = "group.studio.botland.watertruth"
     static let snapshotKey = "widget.snapshot"
 
     static func read() -> WidgetSnapshot? {

@@ -13,7 +13,7 @@
           "locale" : "en_US"
         }
       ],
-      "productID" : "com.botlandstudio.watertruth.pro.lifetime",
+      "productID" : "studio.botland.watertruth.pro.lifetime",
       "referenceName" : "Pro Lifetime",
       "type" : "NonConsumable"
     }
@@ -47,7 +47,7 @@
               "locale" : "en_US"
             }
           ],
-          "productID" : "com.botlandstudio.watertruth.pro.annual",
+          "productID" : "studio.botland.watertruth.pro.annual",
           "recurringSubscriptionPeriod" : "P1Y",
           "referenceName" : "Pro Annual",
           "type" : "RecurringSubscription"
@@ -66,7 +66,7 @@
               "locale" : "en_US"
             }
           ],
-          "productID" : "com.botlandstudio.watertruth.pro.monthly",
+          "productID" : "studio.botland.watertruth.pro.monthly",
           "recurringSubscriptionPeriod" : "P1M",
           "referenceName" : "Pro Monthly",
           "type" : "RecurringSubscription"
