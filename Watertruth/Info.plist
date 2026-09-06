@@ -21,7 +21,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0.0</string>
 	<key>CFBundleVersion</key>
-	<string>3</string>
+	<string>4</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchScreen</key>
@@ -42,5 +42,7 @@
 	<string>Take a photo of your plant for its profile or journal.</string>
 	<key>NSUserNotificationsUsageDescription</key>
 	<string>Watertruth sends soil-check reminders so you water at the right time.</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 </dict>
 </plist>

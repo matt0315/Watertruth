@@ -89,3 +89,11 @@ Watertruth/
 ## License / studio
 
 Botland Studio · Working title Watertruth · Research handoff 2026-09-06
+
+## Botland Studio standards
+
+- Site / contact: https://botland.studio
+- Privacy: https://botland.studio/privacy
+- Terms: https://botland.studio/terms
+- Startup: Botland Studio load screen
+- After ~3 days of use: share-with-friends prompt

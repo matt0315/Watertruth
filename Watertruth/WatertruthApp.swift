@@ -6,6 +6,8 @@ import UserNotifications
 struct WatertruthApp: App {
     @StateObject private var entitlements = EntitlementService.shared
     @StateObject private var shareService = ShareService.shared
+    @StateObject private var sharePrompt = SharePromptService.shared
+    @State private var showSplash = true
 
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
@@ -30,15 +32,33 @@ struct WatertruthApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RootTabView()
-                .environmentObject(entitlements)
-                .environmentObject(shareService)
-                .task {
-                    NotificationService.shared.registerCategories()
-                    _ = await NotificationService.shared.requestAuthorization()
-                    await entitlements.loadProducts()
-                    await entitlements.refreshEntitlements()
+            ZStack {
+                RootTabView()
+                    .environmentObject(entitlements)
+                    .environmentObject(shareService)
+                    .environmentObject(sharePrompt)
+                    .opacity(showSplash ? 0 : 1)
+
+                if showSplash {
+                    BotlandSplashView()
+                        .transition(.opacity)
+                        .zIndex(1)
                 }
+            }
+            .task {
+                sharePrompt.recordLaunch()
+                NotificationService.shared.registerCategories()
+                _ = await NotificationService.shared.requestAuthorization()
+                await entitlements.loadProducts()
+                await entitlements.refreshEntitlements()
+                try? await Task.sleep(nanoseconds: 1_400_000_000)
+                withAnimation(.easeOut(duration: 0.35)) {
+                    showSplash = false
+                }
+            }
+            .sheet(isPresented: $sharePrompt.shouldShowSharePrompt) {
+                ShareWatertruthView(prompt: sharePrompt)
+            }
         }
         .modelContainer(sharedModelContainer)
     }

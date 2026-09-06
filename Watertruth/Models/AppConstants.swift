@@ -9,6 +9,17 @@ enum AppConstants {
     static let trustTagline = "Guide, not gospel — always feel the soil."
     static let notAdviceDisclaimer = "Not professional horticultural advice. When in doubt, check the soil with your finger or a moisture meter."
 
+    /// Studio-wide web (all Botland apps).
+    enum Botland {
+        static let site = URL(string: "https://botland.studio")!
+        static let contact = URL(string: "https://botland.studio")!
+        static let privacy = URL(string: "https://botland.studio/privacy")!
+        static let terms = URL(string: "https://botland.studio/terms")!
+        static let studioName = "Botland Studio"
+        static let shareDelayDays = 3
+        static let appStoreURL = URL(string: "https://apps.apple.com/app/id6809126843")!
+    }
+
     enum ProductID {
         static let annual = "com.botlandstudio.watertruth.pro.annual"
         static let monthly = "com.botlandstudio.watertruth.pro.monthly"

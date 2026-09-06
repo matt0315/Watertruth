@@ -69,9 +69,34 @@ struct SettingsView: View {
                         .listRowBackground(Color.clear)
                 }
 
+                Section("Share") {
+                    ShareLink(
+                        item: AppConstants.Botland.appStoreURL,
+                        subject: Text("Watertruth"),
+                        message: Text(SharePromptService.shared.shareMessage)
+                    ) {
+                        Label("Share Watertruth with friends", systemImage: "square.and.arrow.up")
+                    }
+                }
+
+                Section("Botland Studio") {
+                    Link(destination: AppConstants.Botland.contact) {
+                        Label("Contact / website", systemImage: "globe")
+                    }
+                    Link(destination: AppConstants.Botland.privacy) {
+                        Label("Privacy Policy", systemImage: "hand.raised")
+                    }
+                    Link(destination: AppConstants.Botland.terms) {
+                        Label("Terms of Use", systemImage: "doc.text")
+                    }
+                }
+
                 Section("About") {
                     LabeledContent("Version", value: "1.0.0 MVP")
                     Text("Soil-check-first watering reminders. Not a plant-ID megastore.")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    Text(AppConstants.Botland.studioName)
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
