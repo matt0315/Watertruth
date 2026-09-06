@@ -36,7 +36,8 @@ struct PlantListView: View {
                             NavigationLink {
                                 PlantDetailView(plant: plant)
                             } label: {
-                                HStack {
+                                HStack(spacing: 12) {
+                                    PlantPhotoThumbnail(data: plant.photoData, size: 52, cornerRadius: 10)
                                     VStack(alignment: .leading, spacing: 2) {
                                         Text(plant.nickname)
                                             .font(.headline)

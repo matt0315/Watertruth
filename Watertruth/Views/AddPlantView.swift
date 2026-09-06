@@ -15,6 +15,7 @@ struct AddPlantView: View {
     @State private var lightNote = "Bright indirect"
     @State private var isOutdoor = false
     @State private var intervalDays = 7
+    @State private var photoData: Data?
     @State private var commonPlants: [CommonHouseplant] = CommonHouseplant.load()
 
     private let rooms = ["Living room", "Bedroom", "Kitchen", "Bathroom", "Office", "Balcony", "Patio", "Other"]
@@ -22,6 +23,12 @@ struct AddPlantView: View {
     var body: some View {
         NavigationStack {
             Form {
+                Section("Cover photo") {
+                    PlantPhotoPickerRow(photoData: $photoData, title: "Plant cover", allowRemove: true)
+                    Text("Optional. Shown on your plant list and detail — not for plant ID.")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
                 Section("Profile") {
                     TextField("Nickname", text: $nickname)
                     Picker("Species (curated list)", selection: $speciesTag) {
@@ -83,6 +90,7 @@ struct AddPlantView: View {
             intervalDays: startInterval,
             scheduleMode: .adaptive
         )
+        plant.photoData = photoData
         modelContext.insert(plant)
         try? modelContext.save()
         Task {

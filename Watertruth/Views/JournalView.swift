@@ -77,8 +77,9 @@ struct JournalView: View {
             }
             .onChange(of: pickerItem) { _, newItem in
                 Task {
-                    if let data = try? await newItem?.loadTransferable(type: Data.self) {
-                        pendingPhoto = data
+                    if let data = try? await newItem?.loadTransferable(type: Data.self),
+                       let compressed = ShareCardService.compressedJPEG(from: data) {
+                        pendingPhoto = compressed
                     }
                 }
             }
