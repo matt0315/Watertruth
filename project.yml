@@ -27,7 +27,7 @@ targets:
       properties:
         CFBundleDisplayName: Watertruth
         CFBundleShortVersionString: "1.0.0"
-        CFBundleVersion: "7"
+        CFBundleVersion: "8"
         CFBundleIconName: AppIcon
         UILaunchScreen: {}
         UIRequiresFullScreen: true
@@ -70,7 +70,7 @@ targets:
       properties:
         CFBundleDisplayName: Watertruth Widget
         CFBundleShortVersionString: "1.0.0"
-        CFBundleVersion: "7"
+        CFBundleVersion: "8"
         NSExtension:
           NSExtensionPointIdentifier: com.apple.widgetkit-extension
     entitlements:
