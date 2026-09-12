@@ -9,6 +9,12 @@ struct PaywallView: View {
     @State private var purchasingID: String?
     @State private var showManage = false
 
+    /// Fixed dark ink for light-colored Pro cards (must not follow Dark Mode semantic colors).
+    private static let cardInk = Color(red: 0.12, green: 0.14, blue: 0.12)
+    private static let cardMuted = Color(red: 0.32, green: 0.34, blue: 0.32)
+    private static let badgeFill = Color(red: 0.78, green: 0.90, blue: 0.80)
+    private static let badgeInk = Color(red: 0.18, green: 0.42, blue: 0.26)
+
     private var trialEndText: String {
         let end = Calendar.current.date(byAdding: .day, value: AppConstants.PricingCopy.trialDays, to: Date()) ?? Date()
         let f = DateFormatter()
@@ -95,14 +101,26 @@ struct PaywallView: View {
             .background(WatertruthTheme.pageBackground.ignoresSafeArea())
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
+                ToolbarItem(placement: .topBarLeading) {
                     Button("Close") { dismiss() }
                 }
             }
+            .toolbarBackground(WatertruthTheme.pageBackground, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
             .task {
                 await entitlements.loadProducts()
             }
         }
+    }
+
+    private func ctaTitle(for productID: String) -> String {
+        if productID == AppConstants.ProductID.annual {
+            return "Start \(AppConstants.PricingCopy.trialDays)-day trial"
+        }
+        if productID == AppConstants.ProductID.lifetime {
+            return "Buy lifetime"
+        }
+        return "Subscribe"
     }
 
     @ViewBuilder
@@ -112,21 +130,24 @@ struct PaywallView: View {
             HStack {
                 Text(title)
                     .font(.headline)
+                    .foregroundStyle(Self.cardInk)
                 if let badge {
                     Text(badge)
                         .font(.caption2.weight(.bold))
+                        .foregroundStyle(Self.badgeInk)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
-                        .background(WatertruthTheme.leaf.opacity(0.2))
+                        .background(Self.badgeFill)
                         .clipShape(Capsule())
                 }
                 Spacer()
                 Text(product?.displayPrice ?? price)
                     .font(.headline)
+                    .foregroundStyle(Self.cardInk)
             }
             Text(subtitle)
                 .font(.caption)
-                .foregroundStyle(WatertruthTheme.muted)
+                .foregroundStyle(Self.cardMuted)
             Button {
                 Task {
                     purchasingID = productID
@@ -144,7 +165,7 @@ struct PaywallView: View {
                     ProgressView()
                         .frame(maxWidth: .infinity)
                 } else {
-                    Text(productID == AppConstants.ProductID.annual ? "Start \(AppConstants.PricingCopy.trialDays)-day trial" : "Subscribe")
+                    Text(ctaTitle(for: productID))
                         .frame(maxWidth: .infinity)
                 }
             }
@@ -155,5 +176,7 @@ struct PaywallView: View {
         .padding()
         .background(Color.white)
         .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+        // Keep semantic colors dark on the white card even when the app is in Dark Mode.
+        .environment(\.colorScheme, .light)
     }
 }
